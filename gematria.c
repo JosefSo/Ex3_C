@@ -80,7 +80,7 @@ void all_equal_gematrias(char *text, char *word){
     int size_word = size_text(word);
 
     //find find subarrays of the text
-    findSubarrays(text+(size_word), size, word_g_value);
+    findSubarrays(text, size, word_g_value);
 
 }
 
