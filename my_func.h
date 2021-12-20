@@ -1,8 +1,18 @@
-#ifndef MY_FUNC_H
-#define MY_FUNC_H
+#include <stdio.h>
 
-void input_text(char *text, char *word);
+#define TXT 1024
+#define WORD 30
+
+
 void all_equal_gematrias(char *text, char *word);
 
+void Atbash(char *txt, char *word);
 
-#endif //MY_FUNC_H
+void Anagram(char* word , char* text);
+
+
+
+
+
+
+

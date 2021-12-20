@@ -1,57 +1,85 @@
 #include <stdio.h>
+#include "my_func.h"
 // #include <conio.h>
 #include <stdlib.h>
-#include "my_func.h"
+#include <string.h>
 
 
-#define TXT 1024
-#define WORD 30
+void input_text(char *text, char *word){
+    int i = 0;
+    int j = 0;
+    int flag = 1;
 
-//void all_equal_gematrias(char *text, char *word);
+  while (1) {
+    scanf("%c", &text[i]);
+    if (text[i] == '~') {
+      break;
+    }
+    if (text[i] == ' ' || text[i] == '\n' || text[i] == '\t'){
+        flag = 0;
+    }
+    if (flag){
+        word[j] = text[i];
+        j++;
+    }
+    if (text[i] != '~') {
+      i++;
+    }
+  }
+  
 
-int main()
-{
-  //allocate the requested memory
+  //add \0 to arrays of chars in order to print them in main()
+  text[i] = '\0';
+  word[j] = '\0';
+
+
+}
+
+int main(){
+
+    
+    //allocate the requested memory
   char *text = (char *) malloc(sizeof(char) * TXT);
   char *word = (char *) malloc(sizeof(char) * WORD);
   
+  // if memory cannot be allocated
+  if(text == NULL) {
+    printf("Error! memory for text not allocated.");
+    exit(0);
+  }
+
+  // if memory cannot be allocated
+  if(word == NULL) {
+    printf("Error! memory for word not allocated.");
+    exit(0);
+  }
+
+
   //call the function that inputs text
   input_text(text, word);
 
+  int word_size = strlen(word);
 
-  //check if input was did correctly
-  printf("\n");
-  printf("MAIN: \n");
-  int i = 0;
-  printf("The text is: \n");
-  while (text[i] != '\0') {
-    printf("%c", text[i]);
-    i++;
-  }
-  int j = 0;
-  printf("\n");
-  printf("The word is: \n");
-  while (word[j] != '\0') {
-    printf("%c", word[j]);
-    j++;
-  }
+    // gimatria
+    printf("Gematria Sequences: ");
+    all_equal_gematrias(text + word_size, word);
+    printf("\n");
+    
+    //atbash
+    printf("Atbash Sequences: ");   
+    Atbash(text + word_size, word);
+    // // printf("%s", result);
 
+    // Anagram
+    printf("Anagram Sequences: ");
+    Anagram(word,text + word_size);
+//     // printf("\n");
 
-  i = 0;
-  printf("The text is: \n");
-  while (text[i] != '\0') {
-    printf("%c", text[i]);
-    i++;
-  }
-  printf("\n");
-  printf("The gematries are:\n");
-  //call the function that calculates all equal gimatries in the text
-  all_equal_gematrias(text, word);
-  
-  // free the memory
+// free the memory
   free(text);
   free(word);
   getchar();
-
-  return 0;
 }
+
+
+
